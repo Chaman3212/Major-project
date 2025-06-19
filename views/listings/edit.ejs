@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%= layout("/layouts/boilerplate")  %>
+</head>
+<body>
+    <div class="row">
+    <div class="col-8 offset-2">
+      <h1>Edit Listing</h1>
+     <form class="" method="POST" action="/listings/<%= listing._id  %>?_method=PUT">
+        <div>
+            <label for="title">Title</label>
+        <input class="form-control" type="text" name="listing[title]" value="<%= listing.title  %>">
+        </div>
+
+        <div>
+        <label class="form-label" for="Description">Description</label>
+        <textarea class="form-control"  name="listing[description]" value="<%= listing.description  %>"><%= listing.description  %></textarea>
+        </div>
+        <div>
+        <label class="form-label" for="Image Link">Image Link</label>
+        <input class="form-control" type="text" name="listing[image]" value="<%= listing.image  %>">
+        </div>
+        
+        
+        
+       <div class="row">
+         <div class="col-4">
+        <label for="Price">Price</label>
+        <input class="form-control" type="number" name="listing[price]" value="<%= listing.price  %>">
+        </div>
+    
+        <div class="col-8">
+        <label class="form-label" for="country">Country</label>
+        <input class="form-control" type="text" name="listing[country]" value="<%= listing.country  %>">
+        </div>
+
+       </div>
+        <div>
+        <label class="form-label" for="location">Location</label>
+        <input class="form-control" type="text" name="listing[location]" value="<%= listing.location  %>">
+        </div>
+        
+       <br>
+        <button class="btn btn-dark edit-btn">Edit</button>
+    </form>
+    <br>
+    </div>
+   </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+ <% layout("/layouts/boilerplate") %>
+    <style>
+         button{
+            color: white;
+            background-color: blue;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="offset-2">
+        <h2>Listing Details: </h2>
+    
+        <img src="<%= listing.image  %>" class="show-img" alt="..." style="height: 20rem;">
+         <b><p> <%= listing.title  %>    </p></b>
+         <b><p>&#8377;<%= listing.price.toLocaleString("en-IN") %> </p> </b>  
+         <b><p><%= listing.country  %>    </p></b>
+         <b><p><%= listing.location  %> </p></b>   
+         <b><p><%= listing.description  %> </p></b>   
+        <br>
+       <div class="show-btns">
+         <form method="GET" action="/listings/<%= listing._id %>/edit"><button class="btn btn-dark edit-btn">Edit</button></form>
+        <form method="POST" action="/listings/<%= listing._id %>?_method=Delete"><button class="btn btn-dark">Delete</button></form>
+        
+       </div>
+    
+    </div>
+</body>
+</html>

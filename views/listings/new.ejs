@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<%= layout("layouts/boilerplate")  %>
+</head>
+<body>
+  
+   <div class="row">
+    <div class="col-8 offset-2">
+      <h1>Create A New Listing</h1>
+     <form method="POST" action="/listings" class="novalidation">
+        <div>
+        <label for="title" class="form-label">Title</label><br>
+        <input type="text" name="listing[title]" placeholder="Enter title" class="form-control" required>
+        </div>
+        <div class="invalid-feedback">Please enter a valid Title</div>
+
+         <div>
+            <label for="title" class="form-label">Description</label>
+            <textarea name="listing[description]" class="form-control" required placeholder="Enter description"></textarea>
+            
+        </div>
+
+          
+        
+        <div>
+             <label for="title" class="form-label">Image Link</label>
+             <input type="text" name="listing[image]" placeholder="Enter image URL/Link" class="form-control">
+        </div>
+       
+      
+     
+        <div class="row">
+            <div class="col-4">
+            <label for="title" class="form-label">Price</label>
+            <input  name="listing[price]" placeholder="Enter price" required class="form-control">
+        </div>
+
+        <div class="col-8">
+        <label for="title" class="form-label">Country</label>
+         <input type="text" name="listing[country]" required placeholder="Enter country" class="form-control">
+       </div>
+        </div>
+      
+       
+       <div>
+        <label for="title" class="form-label">Location</label>
+        <input type="text" name="listing[location]" required placeholder="Enter location" class="form-control">
+       </div>
+        
+       
+       <br>
+        <button class="btn btn-dark add-btn">Add</button>
+        
+    </form>
+    <br><br>
+    </div>
+   </div>
+</body>
+</html>
