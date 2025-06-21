@@ -6,8 +6,8 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js")
-const ExpressError = require("./utils/ExpressError.js")
-
+const ExpressError = require("./utils/ExpressError.js");
+const {listingSchema} = require("./schema.js")
 //Database connection
 main().then(()=>{
     console.log("connected to db");
@@ -49,11 +49,13 @@ app.use(express.static(path.join(__dirname,"/public")));
 // });
 
 
+
 //index route
 app.get("/listing",async (req,res)=>{
     const allListings =await Listing.find({})
     res.render("listings/index.ejs",{ allListings });
 })
+
 
 //NEW ROUTE
 app.get("/listings/new",(req,res)=>{
@@ -62,7 +64,12 @@ app.get("/listings/new",(req,res)=>{
 
 //CREATE ROUTE FOR NEW ROUTE
 app.post("/listings",wrapAsync(async (req,res)=>{
-   const newListing= new Listing(req.body.listing);
+    let reuslt = listingSchema.validate(req.body);
+    console.log(reuslt);
+    if(reuslt.error){
+        throw new ExpressError(404,reuslt.error)
+    }
+    const newListing= new Listing(req.body.listing);
     await newListing.save();
     res.redirect("/listing");
     
@@ -103,7 +110,7 @@ app.get("/listings/:id",async (req,res)=>{
 
 app.use((err,req,res,next)=>{
     let{status,message}= err;
-    res.status(status).send(message);
+   res.render("error.ejs",{err})
 })
 
 
