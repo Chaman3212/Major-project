@@ -60,6 +60,7 @@ app.get("/listing",async (req,res)=>{
 //NEW ROUTE
 app.get("/listings/new",(req,res)=>{
     res.render("listings/new.ejs")
+    res.send("hello this is chirag")
 })
 
 //CREATE ROUTE FOR NEW ROUTE
