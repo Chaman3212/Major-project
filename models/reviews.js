@@ -1,0 +1,16 @@
+const { string, number } = require("joi");
+const mongoose = require("mongoose");
+const Schema =  mongoose.Schema;
+
+const reviewSchema = new Schema({
+    Comment:String,
+    rating: {
+        type:number,
+        min:1,
+        max:5
+    },
+    createdAt:{
+        type:Date,
+        default:Date.now()
+    }
+})
