@@ -1,11 +1,11 @@
-const { string, number } = require("joi");
+
 const mongoose = require("mongoose");
 const Schema =  mongoose.Schema;
 
 const reviewSchema = new Schema({
     Comment:String,
     rating: {
-        type:number,
+        type:Number,
         min:1,
         max:5
     },
@@ -14,3 +14,5 @@ const reviewSchema = new Schema({
         default:Date.now()
     }
 })
+
+module.exports = mongoose.model("Review",reviewSchema);
