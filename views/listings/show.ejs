@@ -5,25 +5,66 @@
             background-color: blue;
             padding: 5px;
         }
+        .heading{
+            font-size: 2rem;
+        }
     </style>
 </head>
 <body>
     <div class="offset-2">
-        <h2>Listing Details: </h2>
+        <p class="heading"> <%= listing.owner.username  %>    </p>
+       <b><p class="heading"> <%= listing.title  %>    </p></b>
     
         <img src="<%= listing.image  %>" class="show-img" alt="..." style="height: 20rem;">
-         <b><p> <%= listing.title  %>    </p></b>
+         
          <b><p>&#8377;<%= listing.price.toLocaleString("en-IN") %> </p> </b>  
          <b><p><%= listing.country  %>    </p></b>
          <b><p><%= listing.location  %> </p></b>   
          <b><p><%= listing.description  %> </p></b>   
         <br>
+        <% if(currentUser&& currentUser._id.equals(listing.owner._id)){ %>
        <div class="show-btns">
          <form method="GET" action="/listings/<%= listing._id %>/edit"><button class="btn btn-dark edit-btn">Edit</button></form>
         <form method="POST" action="/listings/<%= listing._id %>?_method=Delete"><button class="btn btn-dark">Delete</button></form>
         
        </div>
-    
+       <% } %>
+      <hr>
     </div>
+     <div class="col-8 offset-3 mb-3">
+        <h4>Review</h4>
+        <form action="/listings/<%= listing._id  %>/review" method="POST" >
+            <div>
+                <label class="form-label" for="Rating">Rating</label>
+                <input  class="form-range" type="range" min="1" max="5" id="rating" name="review[rating]">
+            </div>
+            <br>
+            <div class="mb-3">
+                <label class="form-label" for="comment">Comment</label>
+                <textarea class="form-control"  name="review[Comment]" id="comment" cols="30" rows="" required></textarea>
+            </div>
+            <button class=" btn btn-dark">Submit</button>
+        </form>
+       </div>
+       <hr>
+       <p> All Reviews</p>
+       <div class="row">
+       <% for(review of listing.reviews){ %>
+           <div class="col-5 card border p-3 ms-5 mb-3 rounded">
+             <div class="card-body">
+                <h5 class="card-title">Jhon Doe</h5>
+                <p class="card-text"><%= review.Comment %></p>
+                <p class="card-text"><%= review.rating %> stars</p>
+                 <form method="POST" action="/listings/<%= listing._id %>/review/<%= review._id  %>?_method=delete"><button class="btn btn-dark">Delete</button></form>
+        
+             </div>
+           </div>
+           
+
+            
+            <% } %>
+            </div>
+
+    
 </body>
 </html>
